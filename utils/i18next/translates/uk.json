@@ -1,7 +1,9 @@
 {
 	"auth": {
-		"continue": "продовжити",
-		"login": "логін"
+		"continue": "Продовжити",
+		"login": "Логін",
+		"welcome": "Вітаємо у",
+		"tag": "Тег або імейл"
 	},
 	"validation": {}
 }
