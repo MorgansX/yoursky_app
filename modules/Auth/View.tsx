@@ -1,56 +1,46 @@
 import { PageContainer } from "@/components/templates/PageContainer";
 import { WelcomeContainer } from "@/components/molecules/WelcomeContainer";
 import styled from "styled-components";
-import { Text, TextInput, View } from "react-native";
-import { Translate } from "@/components/atoms/Translate";
-import AntDesign from '@expo/vector-icons/AntDesign';
+import { View, Dimensions } from "react-native";
+import { ActionButton } from "@/components/atoms/ActionButton";
+import { KeyboardWrapper } from "@/components/atoms/KeybordAvoiding";
+import { useAuthController } from "@/modules/Auth/useAuthController";
 
 const FormContainer = styled(View)`
 	width: 90%;
-	background: #006BFF;
 	justify-content: center;
 	align-self: center;
-	flex: 1;
+	height: 80%;
 	border-radius: 8px;
 	padding-left: 10px;
 `;
 
-const InputContainer = styled(View)`
-	width: 95%;
-	flex-direction: row;
+const SubmitContainer = styled(View)`
+	position: absolute;
+	bottom:${({ screenHeight }) => (screenHeight < 700 ? 20 : 50)}px;
+	width: 100%;
 	align-items: center;
-	border-bottom-width: 2px;
-	border-bottom-color: #fff;
-	padding-bottom: 5px;
-`;
-
-const Input = styled(TextInput).attrs({
-	placeholderTextColor: '#c2c2c2',
-	fontSize: 24,
-})`
-	flex: 1;
-	color: #fff;
-	font-weight: 600;
-	padding-left: 5px;
-`;
-
-const Label = styled(Text)`
-	font-size: 16px;
-	color: #fff;
-	margin-bottom: 5px;
 `;
 
 export const AuthView = () => {
+	const { height: screenHeight } = Dimensions.get("screen");
+	const { getInputFields, handleLogin } = useAuthController();
 	return (
-		<PageContainer>
-			<WelcomeContainer />
-			<FormContainer>
-				<Label>{Translate({ key: 'auth.tag' })}</Label>
-				<InputContainer>
-					<AntDesign name="tagso" size={24} color="white" />
-					<Input placeholder={'@tag.bsky.social'} />
-				</InputContainer>
-			</FormContainer>
-		</PageContainer>
+		<KeyboardWrapper>
+			<PageContainer>
+				<WelcomeContainer />
+				<FormContainer>
+					{getInputFields()}
+					<SubmitContainer screenHeight={screenHeight}>
+						<ActionButton
+							text={"auth.login"}
+							bgColor={"#fc3"}
+							textColor={"#fff"}
+							onPress={handleLogin}
+						/>
+					</SubmitContainer>
+				</FormContainer>
+			</PageContainer>
+		</KeyboardWrapper>
 	);
 };

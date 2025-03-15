@@ -3,7 +3,8 @@
 		"continue": "Continue",
 		"login": "Login",
 		"welcome": "Welcome to",
-		"tag": "Tag or email"
+		"tag": "Tag or email",
+		"password": "Password"
 	},
 	"validation": {}
 }

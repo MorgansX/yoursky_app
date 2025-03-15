@@ -3,7 +3,8 @@
 		"continue": "Продовжити",
 		"login": "Логін",
 		"welcome": "Вітаємо у",
-		"tag": "Тег або імейл"
+		"tag": "Tag або email",
+		"password": "Пароль"
 	},
 	"validation": {}
 }
